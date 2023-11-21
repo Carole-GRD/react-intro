@@ -1,0 +1,16 @@
+.list {
+    padding: 0 70px;
+}
+
+.list input {
+    transform: scale(1.5);
+}
+
+.list input:checked {
+    accent-color: #3498db;
+}
+
+.list label {
+    padding-left: 10px;
+    font-size: 1.2rem;
+}
