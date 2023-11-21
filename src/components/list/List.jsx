@@ -15,11 +15,20 @@ function List() {
     const [todos, setTodos] = useState(initialTodos);
 
     const handleChange = (id) => {
-        const todoChecked = todos.find(todo => todo.id === id);
-        console.log(todoChecked);
-
-        setTodos()
+        // Mise à jour du state des todos
+        setTodos((prevTodos) => (
+            // Utilisation de la méthode map pour créer un nouveau tableau de todos
+            prevTodos.map((todo) => 
+                // Vérification si l'ID du todo correspond à l'ID fourni en argument
+                todo.id === id 
+                    // Si l'ID correspond, retourne un nouveau todo avec la propriété 'checked' inversée
+                    ? { ...todo, checked: !todo.checked} 
+                     // Si l'ID ne correspond pas, retourne le même todo sans modification
+                    : todo
+            )
+        ))
     }
+    console.log(todos);
 
     return (
         <div className='list'>
