@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+// import TodosData from './data/todolist.json';
 
 import './App.css'
 import Form from './components/form/Form'
@@ -7,26 +8,31 @@ import Header from './components/header/Header'
 import List from './components/list/List'
 
 
+const LSKEY = "MyTodoApp";
+
+
 function App() {
 
-  const initialTodos = [
-    { id: 1, name: "Learn React", checked: false },
-    { id: 2, name: "Build a React app", checked: false },
-    { id: 3, name: "Explore React Hooks", checked: false },
-    { id: 4, name: "Complete coding challenge", checked: false },
-    { id: 5, name: "Read React documentation", checked: false },
-    { id: 6, name: "Practice React components", checked: false }
-  ];
+  console.log('test');
 
+  // Récupération des todos depuis le localStorage ou utilisation d'une liste vide par défaut
+  const initialTodos = JSON.parse(window.localStorage.getItem(LSKEY + ".todos")) || [];
   const [todos, setTodos] = useState(initialTodos);
+  
+  // localStorage.clear();
 
-  console.log(typeof (todos.length + 1));
+  useEffect(() => {
+    console.log('todos after setTodos', todos);
+    // Sauvegarder les todos dans le localStorage à chaque changement
+    window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
+  }, [todos])
 
   function addTodo(newTodo) {
     const newTodos = [
       ...todos,
       { id: todos.length + 1, name: newTodo, checked: false },
     ];
+    console.log('newTodos after addTodo', newTodos);
     setTodos(newTodos);
   }
 
@@ -45,8 +51,6 @@ function App() {
     ))
 }
 
-
-  
   return (
     <>
       <Header />

@@ -1,0 +1,8 @@
+[
+    { "id": 1, "name": "Learn React", "checked": false },
+    { "id": 2, "name": "Build a React app", "checked": false },
+    { "id": 3, "name": "Explore React Hooks", "checked": false },
+    { "id": 4, "name": "Complete coding challenge", "checked": false },
+    { "id": 5, "name": "Read React documentation", "checked": false },
+    { "id": 6, "name": "Practice React components", "checked": false }
+]
