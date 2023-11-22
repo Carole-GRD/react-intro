@@ -7,17 +7,15 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Deployment :
+
+## Deployment
 
 ### Vercel
 
 https://react-intro-one-kappa.vercel.app/
 
-https://react-intro-8n8vmqi5p-caroles-projects.vercel.app/
-
 ### Netlify
 
 https://precious-churros-80b412.netlify.app/
 
-### GitHub ?
-https://carole-grd.github.io/react-intro/
+
