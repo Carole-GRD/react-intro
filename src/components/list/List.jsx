@@ -33,8 +33,8 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted 
                 <div key={todo.id}>
                     <button className='bin-btn' onClick={() => onDeleteTodo(todo.id)}>
                         <img 
-                            className="../../assets/bin.png"
-                            src="/src/assets/bin.png" 
+                            className="bin-img"
+                            src="./src/assets/bin.png" 
                             alt="Supprimer la todo" 
                         />
                     </button>
