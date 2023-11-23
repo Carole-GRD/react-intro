@@ -87,6 +87,7 @@ function TodoList() {
                 onDeleteTodo={deleteTodo} 
                 onDeleteAll={deleteAll} 
                 onDeleteCompleted={deleteCompleted} 
+                setTodos={setTodos}
             />
         </>
     )
