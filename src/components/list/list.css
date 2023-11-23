@@ -1,3 +1,30 @@
+/* boutons delete all et completed */
+.list .delete {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.list .delete button {   
+    height: 45px;
+    width: 180px;
+    border: 3px solid #3498db;
+    background-color: white;
+    color: #3498db;
+    outline: none;
+    cursor: pointer;
+}
+.list .delete button:hover {   
+    border: 3px solid #3498db;
+    background-color: #3498db;
+    color: #fff;
+    outline: none;
+}
+
+
+
+/* liste de todos */
 .list {
     padding: 0 30px;
 }
@@ -46,8 +73,24 @@
     width: 150px;
     row-gap: 15px;
 }
+.list .select .btn button {
+    border: 3px solid #3498db;
+    background-color: white;
+    color: #3498db;
+    outline: none;
+}
+.list .select .btn button.active {
+    border: 3px solid #3498db;
+    background-color: #3498db;
+    color: white;
+}
+.list .select .btn button:hover {
+    border: 3px solid #3498db;
+    background-color: #3498db;
+    color: white;
+}
 
-
+/* Breakpoint 400px */
 
 @media only screen and (min-width: 400px) {
     .list {
@@ -73,7 +116,14 @@
 }
 
 
+/* Breakpoint 800px */
+
 @media only screen and (min-width: 800px) {
+    .list .delete {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    
     .list .select .btn {
         display: flex;
         flex-direction: row;

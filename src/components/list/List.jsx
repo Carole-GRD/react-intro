@@ -2,37 +2,43 @@
 import { useState } from 'react';
 import './list.css'
 
-function List( { todos, onChecked, onDeleteTodo } ) {
+function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted } ) {
 
+    const [classActive, setClassActive] = useState('all');
 
-    const [todosToDisplay, setTodoToDisplay] = useState('all');
+    const todosToDisplay = (() => {
+        switch (classActive) {
+            case 'active':
+                return todos.filter(todo => !todo.checked);
+            case 'completed':
+                return todos.filter(todo => todo.checked);
+            default:
+                return todos;
+        }
+    })();
 
-    function handleDisplayAll() {
-        setTodoToDisplay('all');
-    }
-
-    function handleDisplayActive() {
-        setTodoToDisplay('active');
-    }
-
-    function handleDisplayCompleted() {
-        setTodoToDisplay('completed');
-    }
-
-    const todosActive = todos.filter(todo => todo.checked === false);
-    const todosCompleted = todos.filter(todo => todo.checked === true);
-
-    const displayTodos = 
-        todosToDisplay === 'all' 
-        ? todos 
-        : (todosToDisplay === 'active' ? todosActive : todosCompleted);
+    const handleDisplayAll = () => setClassActive('all');
+    const handleDisplayActive = () => setClassActive('active');
+    const handleDisplayCompleted = () => setClassActive('completed');
+    
+    const handleDeleteAll = () => onDeleteAll();
+    const handleDeleteCompleted = () => onDeleteCompleted();
 
     return (
         <div className='list'>
+
+            <div className="delete">
+                <button onClick={handleDeleteAll}>
+                    Delete all
+                </button>
+                <button onClick={handleDeleteCompleted}>
+                    Delete completed
+                </button>
+            </div>
             
             <h2>Todos</h2>
 
-            {displayTodos.map((todo) => (
+            {todosToDisplay.map((todo) => (
                 <div key={todo.id}>
                     <button className='bin-btn' onClick={() => onDeleteTodo(todo.id)}>
                         <img 
@@ -57,13 +63,13 @@ function List( { todos, onChecked, onDeleteTodo } ) {
                     {todos.length} item{todos.length > 1 && 's'} left
                 </div>
                 <div className="btn">
-                    <button onClick={handleDisplayAll}>
+                    <button onClick={handleDisplayAll} className={classActive === 'all' ? "active" : ""}>
                         All
                     </button>
-                    <button onClick={handleDisplayActive}>
+                    <button onClick={handleDisplayActive} className={classActive === 'active' ? "active" : ""}>
                         Active
                     </button>
-                    <button onClick={handleDisplayCompleted}>
+                    <button onClick={handleDisplayCompleted} className={classActive === 'completed' ? "active" : ""}>
                         Completed
                     </button>
                 </div>

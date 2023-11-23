@@ -66,6 +66,16 @@ function TodoList() {
         }
     }
 
+    function deleteAll() {
+        setTodos([]);
+    }
+
+    function deleteCompleted() {
+        const todosNotCompleted = todos.filter(todo => !todo.checked);
+        setTodos(todosNotCompleted);
+    }
+    
+
 
     return (
         <>
@@ -75,6 +85,8 @@ function TodoList() {
                 todos={todos} 
                 onChecked={checked} 
                 onDeleteTodo={deleteTodo} 
+                onDeleteAll={deleteAll} 
+                onDeleteCompleted={deleteCompleted} 
             />
         </>
     )
