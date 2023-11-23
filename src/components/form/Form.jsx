@@ -9,10 +9,10 @@ function Form( { onAddTodo } ) {
     function handleAddTodo(event) {
         event.preventDefault(); 
         
-        const inputElement = inputRef.current.value;    // New value 
+        const inputElement = inputRef.current.value;       // New todo (input value)
         if (inputElement.trim() !== '') {
-            onAddTodo(inputElement);                        // Notify the parent about the change
-            inputRef.current.value = '';                    // Clear input after adding todo
+            onAddTodo(inputElement);                       // Notify the parent about the change
+            inputRef.current.value = '';                   // Clear input after adding todo
         }
     }
 

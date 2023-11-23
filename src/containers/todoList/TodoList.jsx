@@ -1,33 +1,42 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 
 import Header from '../../components/header/Header';
 import Form from '../../components/form/Form';
 import List from '../../components/list/List';
+
 
 const LSKEY = "MyTodoApp";
 
 
 function TodoList() {
 
+    const todoId = useId();
+
     // Récupération des todos depuis le localStorage ou utilisation d'une liste vide par défaut
-    const initialTodos = JSON.parse(window.localStorage.getItem(LSKEY + ".todos")) || [];
+    const initialTodos = JSON.parse(localStorage.getItem(LSKEY + ".todos")) || [];
     const [todos, setTodos] = useState(initialTodos);
+
+    // localStorage.clear();
 
     useEffect(() => {
         // Sauvegarder les todos dans le localStorage à chaque changement
-        window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
+        localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
     }, [todos])
 
 
     function addTodo(newTodo) {
-        const newTodos = [
-            ...todos,
-            { id: todos.length + 1, name: newTodo, checked: false },
-        ];
-        setTodos(newTodos);
+        // "isTodo" vérifie que la todo n'existe pas déjà
+        const isTodo = todos.find(todo => todo.name === newTodo);
+        if (!isTodo) {
+            const newTodos = [
+                ...todos,
+                { id: todoId + "-" + newTodo, name: newTodo, checked: false },
+            ];
+            setTodos(newTodos);
+        }
     }
 
-    const checked = (id) => {
+    function checked(id) {
         // Mise à jour du state des todos
         setTodos((prevTodos) => (
             // Utilisation de la méthode map pour créer un nouveau tableau de todos
@@ -42,11 +51,31 @@ function TodoList() {
         ))
     }
 
+    function deleteTodo(id) {
+        // trouve la todo à supprimer
+        const todoToDelete = todos.find(todo => todo.id === id);
+        if (todoToDelete) {
+            // trouve l'index de la todo dans la liste
+            const index = todos.indexOf(todoToDelete);
+            // fais une copie 
+            const newTodos = [...todos];
+            // supprime la todo de la copie
+            newTodos.splice(index, 1);
+            // réactualise l'état de la liste todos
+            setTodos(newTodos);
+        }
+    }
+
+
     return (
         <>
             <Header />
             <Form onAddTodo={addTodo} />
-            <List todos={todos} onChecked={checked} />
+            <List 
+                todos={todos} 
+                onChecked={checked} 
+                onDeleteTodo={deleteTodo} 
+            />
         </>
     )
 }
