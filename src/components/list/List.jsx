@@ -26,15 +26,6 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted 
 
     return (
         <div className='list'>
-
-            <div className="delete">
-                <button onClick={handleDeleteAll}>
-                    Delete all
-                </button>
-                <button onClick={handleDeleteCompleted}>
-                    Delete completed
-                </button>
-            </div>
             
             <h2>Todos</h2>
 
@@ -58,9 +49,10 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted 
                 </div>
             ))}
 
+
             <div className="select">
                 <div className="nbr">
-                    {todos.length} item{todos.length > 1 && 's'} left
+                    {todos.length} todo{todos.length > 1 && 's'}
                 </div>
                 <div className="btn">
                     <button onClick={handleDisplayAll} className={classActive === 'all' ? "active" : ""}>
@@ -73,6 +65,16 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted 
                         Completed
                     </button>
                 </div>
+            </div>
+
+
+            <div className="delete">
+                <button onClick={handleDeleteCompleted}>
+                    Delete completed
+                </button>
+                <button onClick={handleDeleteAll}>
+                    Delete all
+                </button>
             </div>
 
         </div>
