@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import './list.css'
+import binImage from '../../assets/bin.png';
 
 function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted } ) {
 
@@ -34,7 +35,7 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted 
                     <button className='bin-btn' onClick={() => onDeleteTodo(todo.id)}>
                         <img 
                             className="bin-img"
-                            src="./src/assets/bin.png" 
+                            src={binImage} 
                             alt="Supprimer la todo" 
                         />
                     </button>
