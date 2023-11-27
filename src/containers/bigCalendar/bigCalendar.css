@@ -1,0 +1,33 @@
+.big-calendar-container {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    /* margin-top: 50px; */
+}
+
+.big-calendar-container .add-event {
+    display: flex;
+    flex-direction: column;
+}
+
+.big-calendar-container input {
+    width: 20%;
+    margin-right: 10px;
+}
+
+.big-calendar-container .date-picker {
+    width: 20%;
+    margin-right: 10px;
+}
+
+.big-calendar-container .add-event-btn {
+    width: 20%;
+    margin-top: 10px;
+}
+
+.big-calendar-container .big-calendar {
+    margin-top: 50px;
+    position: relative;
+    z-index: -1;
+    height: 650px;
+}

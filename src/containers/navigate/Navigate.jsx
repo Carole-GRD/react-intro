@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import './navigate.css'
 
@@ -7,30 +7,19 @@ function Navigate() {
         <div className='navigate'>
             <ul>
                 <li>
-                    <NavLink 
-                        to="/" 
-                        className={({ isActive, isPending, isTransitioning }) =>
-                            [
-                            isPending ? "pending" : "",
-                            isActive ? "active" : "",
-                            isTransitioning ? "transitioning" : "",
-                            ].join(" ")
-                        }>
+                    <Link to="/">
                         Todo List
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    <NavLink 
-                        to="/calendar"
-                        className={({ isActive, isPending, isTransitioning }) =>
-                            [
-                            isPending ? "pending" : "",
-                            isActive ? "active" : "",
-                            isTransitioning ? "transitioning" : "",
-                            ].join(" ")
-                        }>
+                    <Link to="/calendar">
                         Calendar
-                    </NavLink>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/big-calendar">
+                        Big Calendar
+                    </Link>
                 </li>
             </ul>
         </div>
