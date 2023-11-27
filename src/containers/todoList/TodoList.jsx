@@ -14,7 +14,7 @@ function TodoList() {
 
     // TODO : ne récupérer le localStorage que lors du chargement de la page
     // Récupération des todos depuis le localStorage ou utilisation d'une liste vide par défaut
-    const initialTodos = JSON.parse(localStorage.getItem(LSKEY + ".todos")) || [];
+    const initialTodos = JSON.parse(window.localStorage.getItem(LSKEY + ".todos")) || [];
     const [todos, setTodos] = useState(initialTodos);
 
     // localStorage.clear();
@@ -23,7 +23,7 @@ function TodoList() {
     // TODO : n'enregistrer dans le localStorage que lorsqu'on quitte la page
     useEffect(() => {
         // Sauvegarder les todos dans le localStorage à chaque changement
-        localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
+        window.localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos));
     }, [todos])
 
 

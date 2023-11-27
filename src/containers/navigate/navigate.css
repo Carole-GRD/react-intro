@@ -1,0 +1,29 @@
+
+.navigate {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.navigate ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+.navigate ul li {
+    color: red;
+}
+
+/* .navigate ul li .active {
+    color: green;
+}
+.navigate ul li .pending {
+    color: red;
+}
+.navigate ul li .transitioning {
+    color: orange;
+} */
