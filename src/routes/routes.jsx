@@ -1,5 +1,5 @@
 import App from "../App";
-import TodoList from "../containers/todoList/TodoList";
+import TodoApp from "../containers/todoApp/todoApp";
 import ReactCalendar from "../containers/calendar/ReactCalendar";
 import BigCalendar from "../containers/bigCalendar/BigCalendar";
 
@@ -11,7 +11,7 @@ export const route = [
         children: [
             {
                 index: true,
-                element: <TodoList />,
+                element: <TodoApp />,
             },
             {
                 path: "/calendar",

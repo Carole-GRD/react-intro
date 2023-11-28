@@ -4,19 +4,33 @@ import Header from '../../components/header/Header';
 import Form from '../../components/form/Form';
 import List from '../../components/list/List';
 
+import TodosData from '../../data/todolist.json';
 
 const LSKEY = "MyTodoApp";
 
 
-function TodoList() {
+function TodoApp() {
 
     const todoId = useId();
 
+
     // TODO : ne récupérer le localStorage que lors du chargement de la page
     // Récupération des todos depuis le localStorage ou utilisation d'une liste vide par défaut
-    const initialTodos = JSON.parse(window.localStorage.getItem(LSKEY + ".todos")) || [];
-    const [todos, setTodos] = useState(initialTodos);
+    // const initialTodos = JSON.parse(window.localStorage.getItem(LSKEY + ".todos")) || [];
+    // const [todos, setTodos] = useState(initialTodos);
 
+    // TODO : faire corriger code 
+    const [todos, setTodos] = useState(() => {
+        const storedTodos = JSON.parse(
+            window.localStorage.getItem(LSKEY + ".todos")
+        );
+        console.log('TodosData', TodosData);
+        console.log('storedTodos', storedTodos);
+        return (storedTodos == null || storedTodos.length === 0) ? TodosData : storedTodos;
+    });
+
+
+    // const [todos, setTodos] = useState([]);
     // localStorage.clear();
 
 
@@ -29,11 +43,11 @@ function TodoList() {
 
     function addTodo(newTodo) {
         // "isTodo" vérifie que la todo n'existe pas déjà
-        const isTodo = todos.find(todo => todo.name === newTodo);
+        const isTodo = todos.find(todo => todo.title === newTodo);
         if (!isTodo) {
             const newTodos = [
                 ...todos,
-                { id: todoId + "-" + newTodo, name: newTodo, checked: false },
+                { id: todoId + "-" + newTodo, title: newTodo, checked: false },
             ];
             setTodos(newTodos);
         }
@@ -77,23 +91,23 @@ function TodoList() {
         const todosNotCompleted = todos.filter(todo => !todo.checked);
         setTodos(todosNotCompleted);
     }
-    
+
 
 
     return (
         <>
             <Header />
             <Form onAddTodo={addTodo} />
-            <List 
-                todos={todos} 
-                onChecked={checked} 
-                onDeleteTodo={deleteTodo} 
-                onDeleteAll={deleteAll} 
-                onDeleteCompleted={deleteCompleted} 
+            <List
+                todos={todos}
+                onChecked={checked}
+                onDeleteTodo={deleteTodo}
+                onDeleteAll={deleteAll}
+                onDeleteCompleted={deleteCompleted}
                 setTodos={setTodos}
             />
         </>
     )
 }
 
-export default TodoList
+export default TodoApp

@@ -25,6 +25,23 @@
     margin-top: 10px;
 }
 
+.big-calendar-container .selected-event {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: fit-content;
+    margin: 15px auto 0;
+    background-color: #3498db;
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+
+.big-calendar-container .selected-event span {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
 .big-calendar-container .big-calendar {
     margin-top: 50px;
     position: relative;

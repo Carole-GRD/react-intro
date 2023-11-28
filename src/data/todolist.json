@@ -1,8 +1,44 @@
 [
-    { "id": 1, "name": "Learn React", "checked": false },
-    { "id": 2, "name": "Build a React app", "checked": false },
-    { "id": 3, "name": "Explore React Hooks", "checked": false },
-    { "id": 4, "name": "Complete coding challenge", "checked": false },
-    { "id": 5, "name": "Read React documentation", "checked": false },
-    { "id": 6, "name": "Practice React components", "checked": false }
+    { 
+        "id": 1, 
+        "title": "Learn React", 
+        "checked": false,
+        "start": "2023-11-28",
+        "end": "2023-11-28" 
+    },
+    { 
+        "id": 2, 
+        "title": "Build a React app", 
+        "checked": false,
+        "start": "2023-11-28",
+        "end": "2023-11-28" 
+    },
+    { 
+        "id": 3, 
+        "title": "Explore React Hooks", 
+        "checked": false,
+        "start": "2023-11-28",
+        "end": "2023-11-28" 
+    },
+    { 
+        "id": 4, 
+        "title": "Complete coding challenge", 
+        "checked": false,
+        "start": "2023-11-28",
+        "end": "2023-11-28" 
+    },
+    { 
+        "id": 5, 
+        "title": "Read React documentation", 
+        "checked": false,
+        "start": "2023-11-28",
+        "end": "2023-11-28" 
+    },
+    { 
+        "id": 6, 
+        "title": "Practice React components", 
+        "checked": false,
+        "start": "2023-11-28",
+        "end": "2023-11-28" 
+    }
 ]

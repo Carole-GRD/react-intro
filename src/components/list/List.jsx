@@ -91,12 +91,12 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted,
                         </button>
                         <input 
                             type="checkbox" 
-                            name={todo.name} 
-                            // id={todo.name} 
+                            name={todo.title} 
+                            // id={todo.title} 
                             checked={todo.checked}
                             onChange={() => onChecked(todo.id)}
                         />
-                        <label /*htmlFor={todo.name}*/>{todo.name}</label>
+                        <label /*htmlFor={todo.title}*/>{todo.title}</label>
                         <div className="separate"></div>
                     </div>
                 </div>
