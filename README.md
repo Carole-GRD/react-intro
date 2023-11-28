@@ -12,11 +12,11 @@
 
 ### Vercel
 
-https://react-intro-one-kappa.vercel.app/
+https://react-intro-taupe.vercel.app/
 
 ### Netlify
 
-https://precious-churros-80b412.netlify.app/
+https://resilient-taffy-e461ca.netlify.app/
 
 
 ## Bibliothèques utilisées :
