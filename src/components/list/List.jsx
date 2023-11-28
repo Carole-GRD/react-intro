@@ -122,6 +122,7 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted,
                                     name={todo.title || todoSelected.title}
                                 />
                                 <button className='update-todo-btn'onClick={() => handleUpdateTodo(todo)}>Update</button>
+                                <button className='cancel-todo-btn'onClick={() => onSelectTodo(null)}>Cancel</button>
                             </>
                             
                         }

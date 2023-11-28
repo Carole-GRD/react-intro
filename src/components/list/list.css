@@ -28,6 +28,9 @@
 .list .update-todo-btn {
     margin-left: 60px;
 }
+.list .cancel-todo-btn {
+    margin-left: 20px;
+}
 
 .list .separate {
     height: 1px;
