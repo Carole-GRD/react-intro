@@ -1,9 +1,9 @@
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './list.css'
 import binImage from '../../assets/bin.png';
 
-function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted, setTodos } ) {
+function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted, setTodos, onUpdateTodo, onSelectTodo, todoSelected } ) {
 
     const [classActive, setClassActive] = useState('all');
     const [draggedItem, setDraggedItem] = useState(null);
@@ -67,6 +67,18 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted,
         setDraggedItem(null);
     };
 
+    
+    const inputRef = useRef();
+    function handleUpdateTodo(todo) {
+        // event.preventDefault(); 
+        
+        const inputElement = inputRef.current.value;       // New todo (input value)
+        if (inputElement.trim() !== '') {
+            onUpdateTodo(inputElement, todo);                       // Notify the parent about the change
+            // inputRef.current.value = '';                   // Clear input after adding todo
+        }
+    }
+
     return (
         <div className='list'>
             
@@ -96,7 +108,23 @@ function List( { todos, onChecked, onDeleteTodo, onDeleteAll, onDeleteCompleted,
                             checked={todo.checked}
                             onChange={() => onChecked(todo.id)}
                         />
-                        <label /*htmlFor={todo.title}*/>{todo.title}</label>
+                        {
+                            (!todoSelected || todoSelected.id != todo.id)
+                            ?  
+                            <label /*htmlFor={todo.title}*/ onClick={() => onSelectTodo(todo)}>{todo.title}</label>
+                            : 
+                            <>
+                                <input
+                                    ref={inputRef}
+                                    type="text"
+                                    placeholder={todoSelected.title}
+                                    className='update-todo'
+                                    name={todo.title || todoSelected.title}
+                                />
+                                <button className='update-todo-btn'onClick={() => handleUpdateTodo(todo)}>Update</button>
+                            </>
+                            
+                        }
                         <div className="separate"></div>
                     </div>
                 </div>

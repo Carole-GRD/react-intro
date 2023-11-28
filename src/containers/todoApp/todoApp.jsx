@@ -13,6 +13,8 @@ function TodoApp() {
 
     const todoId = useId();
 
+    const [todoSelected, setTodoSelected] = useState(null);
+
 
     // TODO : ne récupérer le localStorage que lors du chargement de la page
     // Récupération des todos depuis le localStorage ou utilisation d'une liste vide par défaut
@@ -24,8 +26,8 @@ function TodoApp() {
         const storedTodos = JSON.parse(
             window.localStorage.getItem(LSKEY + ".todos")
         );
-        console.log('TodosData', TodosData);
-        console.log('storedTodos', storedTodos);
+        // console.log('TodosData', TodosData);
+        // console.log('storedTodos', storedTodos);
         return (storedTodos == null || storedTodos.length === 0) ? TodosData : storedTodos;
     });
 
@@ -92,6 +94,32 @@ function TodoApp() {
         setTodos(todosNotCompleted);
     }
 
+    function selectTodo(todoSelect) {
+        setTodoSelected(todoSelect);
+        
+
+    }
+
+    function updateTodo(todoToUpdate, todoSelected) {
+        // console.log('todoToUpdate : ', todoToUpdate);
+        // console.log('todoSelected : ', todoSelected);
+        const todoUpdated = todos.find(todo => todo.id === todoSelected.id);
+
+        const newTodo = {...todoSelected, title: todoToUpdate}
+        // console.log('todoUpdated : ', todoUpdated);
+        if (todoUpdated) {
+            // trouve l'index de la todo dans la liste
+            const index = todos.indexOf(todoUpdated);
+            // fais une copie 
+            const newTodos = [...todos];
+            // supprime la todo de la copie
+            newTodos.splice(index, 1, newTodo);
+            // réactualise l'état de la liste todos
+            setTodos(newTodos);
+        }
+        setTodoSelected(null);
+    }
+
 
 
     return (
@@ -102,9 +130,12 @@ function TodoApp() {
                 todos={todos}
                 onChecked={checked}
                 onDeleteTodo={deleteTodo}
+                onSelectTodo={selectTodo}
+                onUpdateTodo={updateTodo}
                 onDeleteAll={deleteAll}
                 onDeleteCompleted={deleteCompleted}
                 setTodos={setTodos}
+                todoSelected={todoSelected}
             />
         </>
     )
