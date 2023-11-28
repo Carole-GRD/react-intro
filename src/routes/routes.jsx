@@ -13,10 +13,10 @@ export const route = [
                 index: true,
                 element: <TodoApp />,
             },
-            {
-                path: "/calendar",
-                element: <ReactCalendar />,
-            },
+            // {
+            //     path: "/calendar",
+            //     element: <ReactCalendar />,
+            // },
             {
                 path: "/big-calendar",
                 element: <BigCalendar />

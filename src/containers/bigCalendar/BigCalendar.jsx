@@ -35,7 +35,6 @@ const myEventsList = [
     }
 ]
 
-
 const localizer = dateFnsLocalizer({
     format,
     parse,
@@ -46,20 +45,17 @@ const localizer = dateFnsLocalizer({
 
 const LSKEY = "MyTodoApp";
 
-function BigCalendar(props) {
 
-    
+
+function BigCalendar() {
+
     const [newEvent, setNewEvent] = useState({title: "", start: "", end: ""})
-    // const [allEvents, setAllEvents] = useState(myEventsList)
     const [selectedEvent, setSelectedEvent] = useState(null);
-    const [updatedEvent, setUpdatedEvent] = useState(null);
 
     const [allEvents, setAllEvents] = useState(() => {
         const storedEvents = JSON.parse(
             window.localStorage.getItem(LSKEY + ".events")
         );
-        console.log('myEventsList', myEventsList);
-        console.log('storedEvents', storedEvents);
         return (storedEvents == null || storedEvents.length === 0) ? myEventsList : storedEvents;
     });
 
@@ -68,76 +64,94 @@ function BigCalendar(props) {
 
     // TODO : n'enregistrer dans le localStorage que lorsqu'on quitte la page
     useEffect(() => {
-        // Sauvegarder les todos dans le localStorage à chaque changement
         window.localStorage.setItem(LSKEY + ".events", JSON.stringify(allEvents));
-        console.log(allEvents);
     }, [allEvents])
-
 
 
     function handleAddEvent() {
         setAllEvents([...allEvents, newEvent]);
+        setNewEvent({ title: "", start: "", end: "" });
     }
 
 
-    // ---------------------------------------------
     function handleDeleteEvent(eventTitle) {
-        const updatedEvents = allEvents.filter(event => event.title !== eventTitle);
-        setAllEvents(updatedEvents);
+        const deletedEvents = allEvents.filter(event => event.title !== eventTitle);
+        setAllEvents(deletedEvents);
+        setSelectedEvent(null);
     }
+
     function handleUpdateEvent(eventToUpdate) {
-        console.log('event to update : ', eventToUpdate);
-        setUpdatedEvent(eventToUpdate);
-        // TODO : lancer la fonction handleAddEvent mais la modifier
-        // il faut vérifier si c'est un nouveau event ou si on modifie l'event !!!
-        // TODO : trouver l'index de l'event à modifier et le modifier
-        // const updatedEvents = allEvents.filter(event => event.title !== eventTitle);
-        // setAllEvents(updatedEvents);
+        
+        const updatedEvent = allEvents.find(event => event.title === eventToUpdate.title);
+
+        if (updatedEvent) {
+            // si les champs sont vides, garde les valeurs avant modification
+            if (newEvent.title === '') {
+                newEvent.title = eventToUpdate.title;
+            }
+            if (newEvent.start === '') {
+                newEvent.start = eventToUpdate.start;
+            }
+            if (newEvent.end === '') {
+                newEvent.end = eventToUpdate.end;
+            }
+            // trouve l'index de l'event dans la liste
+            const index = allEvents.indexOf(updatedEvent);
+            // fais une copie 
+            const newEvents = [...allEvents];
+            // modifie l'event de la copie
+            newEvents.splice(index, 1, newEvent);
+            // réactualise l'état de la liste todos
+            setAllEvents(newEvents);
+        }
+        setNewEvent({ title: "", start: "", end: "" });
+        setSelectedEvent(null);
     }
+
+    // annule la sélection de l'event (si l'utilisateur ne veut pas le modifier, ni le supprimer)
     function handleCancelEvent() {
         setSelectedEvent(null);
-        setUpdatedEvent(null);
     }
 
-    // ---------------------------------------------
 
     return (
         <div className='big-calendar-container'>
-            <h2>{updatedEvent ? 'Update' : 'Add New'} Event</h2>
+            <h2>{selectedEvent ? selectedEvent.title : 'Add New Event'}</h2>
             <div className='add-event'>
                 <input 
                     type="text" 
-                    placeholder="Add Title"
+                    placeholder={selectedEvent ? selectedEvent.title : "Add Title"}
                     value={newEvent.title}
                     onChange={(e) => setNewEvent({...newEvent, title: e.target.value})}
                 />
                 <DatePicker 
                     className="date-picker"
-                    placeholderText="Start Date"
+                    placeholderText={selectedEvent 
+                        ? `${new Date(selectedEvent.start).getDate()}/${new Date(selectedEvent.start).getMonth() + 1}/${new Date(selectedEvent.start).getFullYear()}` 
+                        : "Start Date"}
                     selected={newEvent.start}
                     onChange={(start) => setNewEvent({...newEvent, start})}
                 />
                 <DatePicker 
                     className="date-picker"
-                    placeholderText="End Date"
+                    placeholderText={selectedEvent 
+                        ? `${new Date(selectedEvent.end).getDate()}/${new Date(selectedEvent.end).getMonth() + 1}/${new Date(selectedEvent.end).getFullYear()}` 
+                        : "End Date"}
                     selected={newEvent.end}
                     onChange={(end) => setNewEvent({...newEvent, end})}
                 />
-                <button onClick={handleAddEvent} className='add-event-btn'>
-                    Add Event
-                </button>
+                {!selectedEvent ? (
+                    <button onClick={handleAddEvent} className='add-event-btn'>
+                        Add Event
+                    </button>
+                ) : (
+                    <div className='selected-event'>
+                        <button onClick={() => handleUpdateEvent(selectedEvent)}>Update</button>
+                        <button onClick={() => handleDeleteEvent(selectedEvent.title)}>Delete</button>
+                        <button onClick={handleCancelEvent}>Cancel</button>
+                    </div>
+                )}
             </div>
-            
-            {/* ---------------------------------- */}
-            {selectedEvent && (
-                <div className='selected-event'>
-                    <span>{selectedEvent.title}</span>
-                    <button onClick={() => handleUpdateEvent(selectedEvent)}>Update</button>
-                    <button onClick={() => handleDeleteEvent(selectedEvent.title)}>Delete</button>
-                    <button onClick={handleCancelEvent}>Cancel</button>
-                </div>
-            )}
-            {/* ---------------------------------- */}
             
             
             <Calendar
@@ -146,7 +160,7 @@ function BigCalendar(props) {
                 startAccessor="start"
                 endAccessor="end"
                 className='big-calendar'
-                eventPropGetter={(event) => ({ style: { backgroundColor: '#3498db' } })}
+                eventPropGetter={() => ({ style: { backgroundColor: '#3498db' } })}
                 onSelectEvent={(event) => setSelectedEvent(event)}
             />
         </div>

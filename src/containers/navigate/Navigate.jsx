@@ -7,17 +7,17 @@ function Navigate() {
         <div className='navigate'>
             <ul>
                 <li>
-                    <Link to="/">
+                    <Link to="/" className="nav-link">
                         Todo List
                     </Link>
                 </li>
-                <li>
-                    <Link to="/calendar">
+                {/* <li>
+                    <Link to="/calendar" className="nav-link">
                         Calendar
                     </Link>
-                </li>
+                </li> */}
                 <li>
-                    <Link to="/big-calendar">
+                    <Link to="/big-calendar" className="nav-link">
                         Big Calendar
                     </Link>
                 </li>
