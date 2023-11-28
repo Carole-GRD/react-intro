@@ -28,4 +28,4 @@ https://resilient-taffy-e461ca.netlify.app/
 - **react-fns :** Collection de hooks et d'utilitaires React facilitant l'intégration de fonctionnalités avancées, comme la gestion des dates et des heures, dans vos composants.
 
 ### Routage
-- **React-router :** Bibliothèque de gestion de route pour React, offrant un système de routage déclaratif et flexible pour créer des applications à pages multiples.
+- **react-router-dom :** Bibliothèque de gestion de route pour React, offrant un système de routage déclaratif et flexible pour créer des applications à pages multiples.
