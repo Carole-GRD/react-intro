@@ -1,6 +1,7 @@
 /* liste de todos */
 .list {
     padding: 0 30px;
+    margin-bottom: 50px;
 }
 
 .list .todo-container {
