@@ -1,4 +1,5 @@
-import { useState, useEffect, useId } from 'react';
+import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Header from '../../components/header/Header';
 import Form from '../../components/form/Form';
@@ -11,10 +12,7 @@ const LSKEY = "MyTodoApp";
 
 function TodoApp() {
 
-    const todoId = useId();
-
     const [todoSelected, setTodoSelected] = useState(null);
-
 
     // TODO : ne récupérer le localStorage que lors du chargement de la page
     // Récupération des todos depuis le localStorage ou utilisation d'une liste vide par défaut
@@ -49,7 +47,7 @@ function TodoApp() {
         if (!isTodo) {
             const newTodos = [
                 ...todos,
-                { id: todoId + "-" + newTodo, title: newTodo, checked: false },
+                { id: uuidv4(), title: newTodo, checked: false },
             ];
             setTodos(newTodos);
         }
